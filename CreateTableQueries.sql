@@ -1,3 +1,43 @@
+-- Medicines Table
+CREATE TABLE IF NOT EXISTS Medicines (
+ 		MedicineID 		INT 			AUTO_INCREMENT PRIMARY KEY,
+ 		MedicineName  	VARCHAR(100)	NOT NULL DEFAULT '',
+ 		GenericName 	VARCHAR(100),
+		CategoryID  	INT 			NOT NULL,
+		BrandName		VARCHAR(100)	NOT NULL DEFAULT '',
+		DosageForm		VARCHAR(100)	NOT NULL DEFAULT '',
+		Strength		VARCHAR(100)	NOT NULL DEFAULT '',
+ 		SellingPrice 	DECIMAL(10,2) 	NOT NULL,
+		ReorderLevel 	INT UNSIGNED	NOT NULL DEFAULT 0,
+    
+		CHECK (SellingPrice > 0),
+    
+		FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+);
+-- Batches Table
+CREATE TABLE IF NOT EXISTS Batches(
+ 		BatchID 			INT 			AUTO_INCREMENT PRIMARY KEY,
+		MedicineID 			INT 			NOT NULL,
+		SupplierID 			INT 			NOT NULL,
+ 		BatchNo  			VARCHAR(100)	NOT NULL DEFAULT '',
+ 		ManufactureDate		DATE			NOT NULL,
+		ExpiryDate  		DATE			NOT NULL,
+		UnitCost 			DECIMAL(10,2) 	NOT NULL,
+		QuantityReceived 	INT UNSIGNED	NOT NULL DEFAULT 1,
+    
+		CHECK (ExpiryDate > ManufactureDate),
+		CHECK (UnitCost > 0),
+		CHECK (QuantityReceived > 0),
+    
+		FOREIGN KEY (MedicineID) REFERENCES Medicines(MedicineID),
+		FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID)
+);
+-- Categories Table
+CREATE TABLE IF NOT EXISTS Categories(
+ 		CategoryID 		INT 			AUTO_INCREMENT PRIMARY KEY,
+		CategoryName	VARCHAR(100)	NOT NULL DEFAULT '',
+);
+
 -- Queries to create tables for Supplier, Purchases and Purchase details.
 
 CREATE TABLE IF NOT EXISTS Suppliers (
