@@ -1,0 +1,1 @@
+-- Queries to create tables for Supplier, Purchases and Purchase details.
