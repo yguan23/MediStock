@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS Customers (
 
 	CHECK (DateOfBirth < CURRENT_DATE)
 );
--- Prescription Table
+-- Prescriptions Table
 CREATE TABLE IF NOT EXISTS Prescriptions (
     PrescriptionID     INT AUTO_INCREMENT PRIMARY KEY,
     CustomerID         INT NOT NULL,
